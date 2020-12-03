@@ -8,8 +8,8 @@ require "dependabot/file_fetchers"
 require "dependabot/file_parsers"
 require "dependabot/update_checkers"
 require "dependabot/file_updaters"
-require "dependabot/pull_request_creator"
 require "dependabot/omnibus"
+require "pull_request_creator"
 
 # GitHub credentials with write permission to the repo you want to update
 # (so that you can create a new branch, commit and pull request).
@@ -23,7 +23,7 @@ credentials =
   }]
 
 # Full name of the GitHub repo you want to create pull requests for.
-repo_name = "rasaHQ/rasa"
+repo_name = "alwx/rasa"
 
 # Directory where the base dependency files are.
 directory = "/"
@@ -122,7 +122,7 @@ dependencies.select(&:top_level?).each do |dep|
 end
 
 if number_of_updated_dependencies > 0
-  pr_creator = Dependabot::PullRequestCreator.new(
+  pr_creator = Dependabot::MultipleDepsPullRequestCreator.new(
       source: source,
       base_commit: commit,
       dependencies: deps,
