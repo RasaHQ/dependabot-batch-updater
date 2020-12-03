@@ -9,7 +9,8 @@ require "dependabot/file_parsers"
 require "dependabot/update_checkers"
 require "dependabot/file_updaters"
 require "dependabot/omnibus"
-require "pull_request_creator"
+require "./pull_request_creator"
+require "./file_updaters"
 
 # GitHub credentials with write permission to the repo you want to update
 # (so that you can create a new branch, commit and pull request).
@@ -74,9 +75,10 @@ parser = Dependabot::FileParsers.for_package_manager(package_manager).new(
 dependencies = parser.parse
 number_of_updated_dependencies = 0
 deps = []
+updater = nil
 
 dependencies.select(&:top_level?).each do |dep|
-  break if number_of_updated_dependencies == 5
+  break if number_of_updated_dependencies == 8
 
   checker = Dependabot::UpdateCheckers.for_package_manager(package_manager).new(
       dependency: dep,
@@ -119,6 +121,12 @@ dependencies.select(&:top_level?).each do |dep|
   updated_files_names = updated_files.map { |file| file.name }
   other_files = files.select { |file| not updated_files_names.include?(file.name) }
   files = other_files | updated_files
+end
+
+if updater
+  # we might need to update the lockfile
+  # after we finish updating all the dependencies
+  files = updater.finalize
 end
 
 if number_of_updated_dependencies > 0
