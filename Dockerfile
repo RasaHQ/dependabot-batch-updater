@@ -14,8 +14,8 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python get-pip.py
 RUN pip install poetry==1.0.9
 
-# copy script
-COPY update-script.rb ${CODE_DIR}/
+# copy scripts
+COPY . ${CODE_DIR}/
 
 # run script
-RUN ruby ./update-script.rb
+RUN ruby ./update_script.rb
