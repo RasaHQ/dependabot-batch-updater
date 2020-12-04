@@ -130,7 +130,7 @@ end
 if updater
   # we might need to update the lockfile
   # after we finish updating all the dependencies
-  files = updater.finalize
+  # files = updater.finalize
 end
 
 if number_of_updated_dependencies > 0
