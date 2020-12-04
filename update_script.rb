@@ -132,6 +132,7 @@ if updater
 end
 
 if number_of_updated_dependencies > 0
+  print "Create PR...\n"
   pr_creator = Dependabot::MultipleDepsPullRequestCreator.new(
       source: source,
       base_commit: commit,
@@ -140,5 +141,6 @@ if number_of_updated_dependencies > 0
       credentials: credentials,
       label_language: true,
   )
-  pr_creator.create
+  pr = pr_creator.create
+  print pr
 end
