@@ -12,13 +12,14 @@ require "dependabot/omnibus"
 require "/dist/src/pull_request_creator"
 require "/dist/src/file_updaters"
 
-if ARGV.length != 5
+if ARGV.length != 6
   abort("Arguments need to be specified. See `README.md` for the details.")
 end
 
-token = ARGV[0]
-repo_name = ARGV[1]
-directory = ARGV[2]
+username = ARGV[0]
+token = ARGV[1]
+repo_name = ARGV[2]
+directory = ARGV[3]
 # Name of the package manager you'd like to do the update for. Options are:
 # - bundler
 # - pip (includes pipenv)
@@ -35,8 +36,8 @@ directory = ARGV[2]
 # - submodules
 # - docker
 # - terraform
-package_manager = ARGV[3]
-batch_size = ARGV[4].to_i
+package_manager = ARGV[4]
+batch_size = ARGV[5].to_i
 
 # GitHub credentials with write permission to the repo you want to update
 # (so that you can create a new branch, commit and pull request).
@@ -45,6 +46,7 @@ credentials =
   [{
     "type" => "git_source",
     "host" => "github.com",
+    "username" => username,
     "password" => token
   }]
 

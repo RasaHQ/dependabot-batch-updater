@@ -1,8 +1,11 @@
 name: 'Dependabot Multiple Dependencies Updater'
 description: 'Update several dependencies at once'
 inputs:
+  username:
+    description: 'Username to authenticate the request'
+    required: true
   token:
-    description: 'Token to authenticate the request'
+    description: 'Token/password to authenticate the request'
     required: true
   repository:
     description: 'Full name of the GitHub repo you want to create pull requests for'
@@ -23,6 +26,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.username }}
     - ${{ inputs.token }}
     - ${{ inputs.repository }}
     - ${{ inputs.directory }}
