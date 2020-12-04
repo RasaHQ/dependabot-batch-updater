@@ -16,6 +16,7 @@ module Dependabot
   module Python
     class MultiDepFileUpdater < Dependabot::Python::FileUpdater
       def finalize
+        print "Finalize...\n"
         self.updated_dependency_files
       end
     end

@@ -45,7 +45,7 @@ credentials =
   [{
     "type" => "git_source",
     "host" => "github.com",
-    "password" => token
+    "password" => "xxx"
   }]
 
 
@@ -141,6 +141,5 @@ if number_of_updated_dependencies > 0
       credentials: credentials,
       label_language: true,
   )
-  pr = pr_creator.create
-  print pr
+  pr_creator.create
 end
