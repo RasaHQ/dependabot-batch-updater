@@ -1,5 +1,5 @@
 FROM dependabot/dependabot-core
-ARG CODE_DIR=/home/dependabot/dependabot-core
+ARG CODE_DIR=/dist
 WORKDIR ${CODE_DIR}
 
 COPY Gemfile ${CODE_DIR}/
@@ -19,4 +19,4 @@ COPY update_script.rb ${CODE_DIR}/
 COPY src/ ${CODE_DIR}/src/
 
 # run script
-ENTRYPOINT ["ruby", "/home/dependabot/dependabot-core/update_script.rb"]
+ENTRYPOINT ["ruby", "/dist/update_script.rb"]

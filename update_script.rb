@@ -9,8 +9,8 @@ require "dependabot/file_parsers"
 require "dependabot/update_checkers"
 require "dependabot/file_updaters"
 require "dependabot/omnibus"
-require "./src/pull_request_creator"
-require "./src/file_updaters"
+require "/dist/src/pull_request_creator"
+require "/dist/src/file_updaters"
 
 if ARGV.length != 5
   abort("Arguments need to be specified. See `README.md` for the details.")
