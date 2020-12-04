@@ -19,4 +19,4 @@ COPY update_script.rb ${CODE_DIR}/
 COPY src/ ${CODE_DIR}/src/
 
 # run script
-ENTRYPOINT ["ruby", "./update_script.rb"]
+ENTRYPOINT ["ruby", "update_script.rb"]
