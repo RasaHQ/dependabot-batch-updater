@@ -1,0 +1,30 @@
+name: 'Dependabot Multiple Dependencies Updater'
+description: 'Update several dependencies at once'
+inputs:
+  token:
+    description: 'Token to authenticate the request'
+    required: true
+  repository:
+    description: 'Full name of the GitHub repo you want to create pull requests for'
+    required: true
+  directory:
+    description: 'Directory where the base dependency files are'
+    required: true
+    default: "/"
+  package-manager:
+    description: 'Package manager'
+    required: true
+    default: "pip"
+  batch-size:
+    description: 'Batch size'
+    required: true
+    default: "5"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.directory }}
+    - ${{ inputs.package-manager }}
+    - ${{ inputs.batch-size }}

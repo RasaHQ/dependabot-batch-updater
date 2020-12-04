@@ -15,7 +15,8 @@ RUN python get-pip.py
 RUN pip install poetry==1.0.9
 
 # copy scripts
-COPY . ${CODE_DIR}/
+COPY update_script.rb ${CODE_DIR}/
+COPY src/ ${CODE_DIR}/src/
 
 # run script
-RUN ruby ./update_script.rb
+ENTRYPOINT ["ruby", "./update_script.rb"]

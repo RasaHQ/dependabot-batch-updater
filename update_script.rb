@@ -9,26 +9,16 @@ require "dependabot/file_parsers"
 require "dependabot/update_checkers"
 require "dependabot/file_updaters"
 require "dependabot/omnibus"
-require "./pull_request_creator"
-require "./file_updaters"
+require "./src/pull_request_creator"
+require "./src/file_updaters"
 
-# GitHub credentials with write permission to the repo you want to update
-# (so that you can create a new branch, commit and pull request).
-# If using a private registry it's also possible to add details of that here.
-credentials =
-  [{
-    "type" => "git_source",
-    "host" => "github.com",
-    "username" => "alwx",
-    "password" => ""
-  }]
+if ARGV.length != 5
+  abort("Arguments need to be specified. See `README.md` for the details.")
+end
 
-# Full name of the GitHub repo you want to create pull requests for.
-repo_name = "alwx/rasa"
-
-# Directory where the base dependency files are.
-directory = "/"
-
+token = ARGV[0]
+repo_name = ARGV[1]
+directory = ARGV[2]
 # Name of the package manager you'd like to do the update for. Options are:
 # - bundler
 # - pip (includes pipenv)
@@ -45,7 +35,19 @@ directory = "/"
 # - submodules
 # - docker
 # - terraform
-package_manager = "pip"
+package_manager = ARGV[3]
+batch_size = ARGV[4].to_i
+
+# GitHub credentials with write permission to the repo you want to update
+# (so that you can create a new branch, commit and pull request).
+# If using a private registry it's also possible to add details of that here.
+credentials =
+  [{
+    "type" => "git_source",
+    "host" => "github.com",
+    "password" => token
+  }]
+
 
 source = Dependabot::Source.new(
   provider: "github",
@@ -78,7 +80,7 @@ deps = []
 updater = nil
 
 dependencies.select(&:top_level?).each do |dep|
-  break if number_of_updated_dependencies == 8
+  break if number_of_updated_dependencies == batch_size
 
   checker = Dependabot::UpdateCheckers.for_package_manager(package_manager).new(
       dependency: dep,
