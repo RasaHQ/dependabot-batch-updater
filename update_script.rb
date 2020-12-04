@@ -45,7 +45,7 @@ credentials =
   [{
     "type" => "git_source",
     "host" => "github.com",
-    "password" => "xxx"
+    "password" => token
   }]
 
 
