@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require "dependabot/pull_request_creator"
-require "./pull_request_creator/message_builder"
-require "./pull_request_creator/branch_namer"
+require "./src/pull_request_creator/message_builder"
+require "./src/pull_request_creator/branch_namer"
 
 module Dependabot
   class MultipleDepsPullRequestCreator < PullRequestCreator
