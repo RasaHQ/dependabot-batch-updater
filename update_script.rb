@@ -50,12 +50,6 @@ credentials =
     "password" => token
   }]
 
-print ARGV[0].length
-print ARGV[1].length
-print "\n"
-print username.length
-print token.length
-
 source = Dependabot::Source.new(
   provider: "github",
   repo: repo_name,
@@ -141,7 +135,7 @@ end
 
 if number_of_updated_dependencies > 0
   print "Create PR...\n"
-  pr_creator = Dependabot::PullRequestCreator.new(
+  pr_creator = Dependabot::MultipleDepsPullRequestCreator.new(
       source: source,
       base_commit: commit,
       dependencies: deps,
