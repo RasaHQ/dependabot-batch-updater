@@ -50,6 +50,8 @@ credentials =
     "password" => token
   }]
 
+print username.length
+print token.length
 
 source = Dependabot::Source.new(
   provider: "github",
