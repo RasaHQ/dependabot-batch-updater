@@ -50,6 +50,9 @@ credentials =
     "password" => token
   }]
 
+print ARGV[0].length
+print ARGV[1].length
+print "\n"
 print username.length
 print token.length
 
@@ -132,12 +135,13 @@ end
 if updater
   # we might need to update the lockfile
   # after we finish updating all the dependencies
+  print "Finalize...\n"
   files = updater.finalize
 end
 
 if number_of_updated_dependencies > 0
   print "Create PR...\n"
-  pr_creator = Dependabot::MultipleDepsPullRequestCreator.new(
+  pr_creator = Dependabot::PullRequestCreator.new(
       source: source,
       base_commit: commit,
       dependencies: deps,
