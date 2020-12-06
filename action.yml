@@ -4,7 +4,7 @@ inputs:
   username:
     description: 'Username to authenticate the request'
     required: true
-  token:
+  repo-token:
     description: 'Token/password to authenticate the request'
     required: true
   repository:
@@ -27,7 +27,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.username }}
-    - ${{ inputs.token }}
+    - ${{ inputs.repo-token }}
     - ${{ inputs.repository }}
     - ${{ inputs.directory }}
     - ${{ inputs.package-manager }}
