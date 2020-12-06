@@ -16,10 +16,10 @@ if ARGV.length != 6
   abort("Arguments need to be specified. See `README.md` for the details.")
 end
 
-username = ARGV[0]
-token = ARGV[1]
-repo_name = ARGV[2]
-directory = ARGV[3]
+username = ARGV[0].strip
+token = ARGV[1].strip
+repo_name = ARGV[2].strip
+directory = ARGV[3].strip
 # Name of the package manager you'd like to do the update for. Options are:
 # - bundler
 # - pip (includes pipenv)
@@ -36,7 +36,7 @@ directory = ARGV[3]
 # - submodules
 # - docker
 # - terraform
-package_manager = ARGV[4]
+package_manager = ARGV[4].strip
 batch_size = ARGV[5].to_i
 
 # GitHub credentials with write permission to the repo you want to update
