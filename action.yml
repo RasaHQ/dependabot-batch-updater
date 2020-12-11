@@ -4,6 +4,7 @@ inputs:
   username:
     description: 'Username to authenticate the request'
     required: true
+    default: ""
   repo-token:
     description: 'Token/password to authenticate the request'
     required: true
